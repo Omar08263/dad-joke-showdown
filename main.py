@@ -16,6 +16,9 @@ def main() -> None:
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as handle:
         handle.write(JOKE)
+    # The grader collects /output as another user, so the file must be
+    # readable by everyone, whatever the sandbox umask is.
+    os.chmod("/output/entry.txt", 0o644)
     # Self-check against the competition's gate: 1-200 characters,
     # UTF-8 text, not only white space.
     with open("/output/entry.txt", encoding="utf-8") as handle:
